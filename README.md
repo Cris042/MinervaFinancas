@@ -1,8 +1,5 @@
 # Minerva Finanças
 
-Aplicação de finanças pessoais do processo seletivo da MAPS, implementada até o **nível 3**, com as
-opções **A (multiusuário)** e **B (consulta assíncrona de alto volume)** — as duas, não uma.
-
 A aplicação ajuda a gerir ativos financeiros e a acompanhar patrimônio e saldo em conta corrente,
 sempre em função de uma **data**: saldo, posição e preço de mercado são conceitos datados, e é isso
 que organiza o desenho inteiro.
