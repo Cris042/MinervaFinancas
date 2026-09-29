@@ -569,13 +569,33 @@ os dados não morram com o contêiner. O resultado é **um artefato só**, servi
 docker compose up --build       # http://localhost:8080
 ```
 
-**❓ LACUNA — deploy em nuvem.** Não foi realizado nesta entrega. A decisão de quando e em qual
-plataforma acionar fica com o usuário; nenhum prazo ou provedor está fixado aqui. O que depende desta
-entrega está pronto — `Dockerfile`, `docker-compose.yml`, configuração por variável de ambiente
-(`SPRING_DATASOURCE_URL`) e healthcheck. Em qualquer plataforma de free tier que aceite um Dockerfile
-(Fly.io, Render, Railway, Koyeb são exemplos, não uma escolha feita), o passo é apontar o serviço para
-este repositório, expor a porta 8080 e montar um volume em `/app/data`; o passo em si exige
-credenciais da plataforma escolhida, que são do dono do repositório.
+O deploy em nuvem já foi realizado no **Render**, plano **free**, região **virginia**. O serviço
+`minerva-financas` (`srv-datskl093c1s73bshpc0`) está público em
+<https://minerva-financas.onrender.com>, sem custo. O health check do Render é `GET /` (200); a rota
+`/ativos` exige HTTP Basic e responde 401 sem credencial e 200 para `root`.
+
+O Render constrói a imagem pelo `Dockerfile` na raiz deste repositório, em runtime Docker, a partir da
+branch `main`; cada push nessa branch dispara auto-deploy. As variáveis configuradas **no serviço, fora
+do repositório**, são:
+
+- `SPRING_DATASOURCE_URL=jdbc:sqlite:/tmp/minerva-financas.db`: o Render free não monta o volume em
+  `/app/data` esperado pelo Dockerfile nem oferece disco persistente. O usuário sem privilégios
+  `minerva` não pode criar esse caminho; `/tmp` é gravável. O primeiro deploy falhou com
+  `SQLITE_CANTOPEN` antes desse ajuste.
+- `JAVA_TOOL_OPTIONS=-XX:MaxRAMPercentage=70 -XX:+UseSerialGC -Xss512k`: limita o uso de memória para
+  caber nos 512 MB da instância gratuita.
+
+### Banco efêmero
+
+Por decisão do usuário, o deploy mantém SQLite efêmero e a ADR-001 não é alterada. A cada hibernação
+(15 minutos sem tráfego) ou novo deploy, o banco volta apenas à semente: `ATIVO0`–`ATIVO127`,
+`usuario0`–`usuario9` e `root`. Dados cadastrados se perdem. A primeira requisição após hibernação é
+lenta pela partida do Spring Boot; o primeiro deploy levou cerca de 3 minutos para ficar pronto.
+
+Para reproduzir em outra plataforma, construa a imagem a partir do `Dockerfile` da raiz, publique a
+porta 8080 e configure as duas variáveis acima. Em plataforma sem disco persistente, mantenha a URL
+SQLite em um diretório gravável efêmero, como `/tmp`, aceitando essa perda de dados; com disco
+persistente, monte-o em `/app/data` e aponte `SPRING_DATASOURCE_URL` para esse volume.
 
 ## Premissas assumidas
 
@@ -594,8 +614,6 @@ Onde o enunciado não especifica, a escolha está isolada e documentada, em vez 
 
 ## O que não foi entregue
 
-- **❓ LACUNA — deploy em nuvem.** Não realizado nesta entrega, por decisão do usuário de adiar; o
-  passo final depende de credenciais da plataforma escolhida, ainda não definida. Ver [Deploy](#deploy).
 - **Sparkline de patrimônio e exportação em CSV/PDF.** Não há requisito para nenhum dos dois, e ambos
   seguem declarados como não desenhados em `docs/design/nao-desenhado.md`.
 - **Tema escuro.** Decisão explícita, não omissão: inverter os tokens automaticamente quebraria as
