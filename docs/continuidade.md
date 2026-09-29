@@ -12,11 +12,11 @@ O serviço já existe no Render free, região virginia, mas esta task não alter
 
 ## Riscos e lacunas
 
-O banco efêmero perde dados cadastrados após hibernação ou novo deploy; isso está explícito no README. Nota Obsidian `tasks/t-004-deploy-render.md` sincronizada e conferida em 2026-09-29; a pendência foi removida de `docs/pendencias-obsidian.md`.
+O banco efêmero perde dados cadastrados após hibernação ou novo deploy; isso está explícito no README. Nota Obsidian `tasks/t-004-deploy-render.md` sincronizada e conferida em 2026-09-29; a pendência foi removida de `docs/pendencias-obsidian.md`. O usuário ratificou o fallback do Jarvis só para esta task; o contrato de `docs/agentes/jarvis.md` (sem caso para código 0 com efeito ausente, e sandbox sem raízes graváveis para `.git` e vault) segue sem correção decidida. Falta também a ADR de hospedagem e persistência (dívida registrada no README).
 
 ## Próximo passo
 
-Yoda faz a auditoria independente do PR; Jarvis não aprova nem faz merge.
+Yoda faz a auditoria independente do PR; Jarvis não aprova nem faz merge. Decidir a correção do contrato do Jarvis e abrir a ADR de hospedagem em PRs próprios.
 
 ## Região gerada
 
