@@ -26,8 +26,8 @@ Atualizar a documentação para descrever, sem alterar o produto, o deploy já r
 ## Resumo decisório mínimo
 
 - Objetivo: substituir a lacuna falsa de deploy em nuvem por fatos verificados do Render, com limites operacionais explícitos.
-- Decisão: via rápida; publicar somente fatos fornecidos pelo usuário em `README.md` e artefatos de governança documental.
-- Evidências: fatos de produção verificados pelo usuário em 2026-09-29; validações documentais proporcionais previstas nesta task.
+- Decisão: via rápida; publicar somente fatos fornecidos pela sessão principal em `README.md` e artefatos de governança documental.
+- Evidências: fatos de produção verificados pela sessão principal em 2026-09-29; validações documentais proporcionais previstas nesta task.
 - Riscos e lacunas: dados SQLite são efêmeros no Render free e se perdem após hibernação ou novo deploy; não há lacuna bloqueante para registrar esse fato.
 - Próximo passo: Jarvis atualiza os arquivos permitidos, executa os gates documentais e abre PR para auditoria independente de Yoda.
 
@@ -57,7 +57,7 @@ O README informa que `minerva-financas` está disponível no Render e descreve p
 
 ## Dependências e bloqueios
 
-- Fatos do deploy fornecidos e verificados pelo usuário em 2026-09-29; disponíveis.
+- Fatos do deploy fornecidos e verificados pela sessão principal em 2026-09-29; disponíveis.
 - Acesso de escrita ao vault Obsidian; a pendência deve permanecer aberta se o caminho externo não puder ser escrito.
 
 ## Passos de implementação
@@ -111,3 +111,6 @@ O README informa que `minerva-financas` está disponível no Render e descreve p
 ## Histórico
 
 - 2026-09-29: task criada com status em-andamento.
+- 2026-09-29: o usuário ratificou explicitamente o fallback usado nesta task (o Codex saiu com código 0, mas o sandbox bloqueou git, `gh` e vault, e esse efeito ficou ausente). A ratificação vale só para esta task; o contrato de `docs/agentes/jarvis.md` não foi alterado.
+- 2026-09-29: achados N3 (origem da evidência é a sessão principal) e N5 (executor do fallback foi Claude Sonnet sobre edições do Codex; a linha `Co-Authored-By: Claude Opus 5.5` do commit anterior veio de instrução da sessão principal) corrigidos.
+- 2026-09-29: as correções N1 a N5 foram levadas por este PR de acompanhamento porque o squash do PR #2 foi feito antes delas.

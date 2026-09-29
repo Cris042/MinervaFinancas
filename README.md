@@ -592,6 +592,11 @@ Por decisão do usuário, o deploy mantém SQLite efêmero e a ADR-001 não é a
 `usuario0`–`usuario9` e `root`. Dados cadastrados se perdem. A primeira requisição após hibernação é
 lenta pela partida do Spring Boot; o primeiro deploy levou cerca de 3 minutos para ficar pronto.
 
+⚠️ **DÍVIDA — falta ADR de hospedagem e persistência.** A escolha de hospedar no Render free com
+SQLite efêmero não tem ADR própria; a ADR-001 não cobre hospedagem nem durabilidade dos dados. Foi
+aceita por decisão explícita do usuário em 2026-09-29, com o custo documentado neste README; a ADR
+ficará para um PR separado.
+
 Para reproduzir em outra plataforma, construa a imagem a partir do `Dockerfile` da raiz, publique a
 porta 8080 e configure as duas variáveis acima. Em plataforma sem disco persistente, mantenha a URL
 SQLite em um diretório gravável efêmero, como `/tmp`, aceitando essa perda de dados; com disco
