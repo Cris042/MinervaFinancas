@@ -113,3 +113,4 @@ O README informa que `minerva-financas` está disponível no Render e descreve p
 - 2026-09-29: task criada com status em-andamento.
 - 2026-09-29: o usuário ratificou explicitamente o fallback usado nesta task (o Codex saiu com código 0, mas o sandbox bloqueou git, `gh` e vault, e esse efeito ficou ausente). A ratificação vale só para esta task; o contrato de `docs/agentes/jarvis.md` não foi alterado.
 - 2026-09-29: achados N3 (origem da evidência é a sessão principal) e N5 (executor do fallback foi Claude Sonnet sobre edições do Codex; a linha `Co-Authored-By: Claude Opus 5.5` do commit anterior veio de instrução da sessão principal) corrigidos.
+- 2026-09-29: as correções N1 a N5 foram levadas por este PR de acompanhamento porque o squash do PR #2 foi feito antes delas.
